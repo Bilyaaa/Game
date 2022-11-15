@@ -1,17 +1,17 @@
 .game-wrapper {
     position: relative;
     margin-top: 30%;
-    padding-left: 20%;
+    padding-left: 300px;
 }
 
 .character {
     position: relative;
-    bottom: 0;
-    width: 30px;
-    height: 30px;
-    border: 2px solid black;
+    background-image: url('./img/IMG_5201.jpg');
+    background-size: 100%;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
     transition: all cubic-bezier(0, 0, 0.46, 1.11) .5s;
-
 }
 
 .falling {
@@ -28,57 +28,13 @@
 
 .small-block {
     position: absolute;
-    bottom: 0;
+    background-image: url('./img/kaka.jpg');
+    background-size: 100%;
+    bottom: 5px;
     width: 50px;
     height: 50px;
-    border: 3px solid black;
     border-bottom: none;
     background-color: white;
-
-}
-
-.small-block2 {
-    position: absolute;
-    bottom: 0;
-    width: 50px;
-    height: 50px;
-    border: 3px solid black;
-    border-bottom: none;
-    background-color: white;
-
-}
-
-.small-block3 {
-    position: absolute;
-    bottom: 0;
-    width: 50px;
-    height: 50px;
-    border: 3px solid black;
-    border-bottom: none;
-    background-color: white;
-
-}
-
-.small-block4 {
-    position: absolute;
-    bottom: 0;
-    width: 50px;
-    height: 50px;
-    border: 3px solid black;
-    border-bottom: none;
-    background-color: white;
-
-}
-
-.small-block5 {
-    position: absolute;
-    bottom: 0;
-    width: 50px;
-    height: 50px;
-    border: 3px solid black;
-    border-bottom: none;
-    background-color: white;
-
 }
 
 .start-alert {
@@ -88,6 +44,22 @@
     left: 40%;
     background-color: green;
     font-size: 5rem;
-    z-index: 100;
-    
+    z-index: 100;  
+}
+
+.game-over-alert {
+    display: none;
+    top: -200px;
+    left: 40%;
+    position: relative;
+    width: 300px;
+    height: 300px;
+    background-image: url('./img/IMG_5201.jpg');
+    background-size: 100%;
+}
+
+.game-over-alert img {
+    position: absolute;
+    left: 50px;
+    top: -100px;
 }

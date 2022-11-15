@@ -1,21 +1,12 @@
 let character = document.querySelector('.character')
+character.setAttribute('style', 'bottom: 0')
 let game = document.querySelector('.game-wrapper')
 let line = document.querySelector('.line-wrapper')
+let bottom = character.getAttribute('style')
 let timeOut 
 let k = 4
 let startAlert = document.querySelector('.start-alert')
 
-let origBlock = document.createElement('div')
-let block = origBlock.cloneNode(true)
-let block2 = origBlock.cloneNode(true)
-let block3 = origBlock.cloneNode(true)
-let block4 = origBlock.cloneNode(true)
-let block5 = origBlock.cloneNode(true)
-block.classList.add('small-block')
-block2.classList.add('small-block2')
-block3.classList.add('small-block3')
-block4.classList.add('small-block4')
-block5.classList.add('small-block5')
 
 
 function getRandomInt() {
@@ -27,129 +18,51 @@ function getRandomInt() {
 function jump () {
     
     character.setAttribute('style', 'bottom: 300px')
-
+    bottom = 'bottom: 300px'
+    console.log(character.getAttribute('style'))
     setTimeout(function() {
         character.classList.add('falling')
-        character.setAttribute('style', 'bottom: 0') 
+        character.setAttribute('style', 'bottom: 0')
+        
+        console.log(character.getAttribute('style'))
       
-    },300)
+    },400)
     setTimeout(function() {
         character.classList.remove('falling')
+        bottom = 'bottom: 0'
     },1000) 
-}
-
-function createSmallBlock () {
-    line.append(block)
-    let i = 50
-    block.style.left = '800px'
-    let leftNumber = Number(block.style.left.split('px').join(''))
     
-    let timerId = setInterval(() => {
-        i = i + 2
-        leftNumber -= 2
-
-        block.style.left = leftNumber + 'px'
-        console.log(leftNumber)
-        if (character.getAttribute('style', 'bottom: 0') && leftNumber < 60)  {
-            console.log('game over')
-        }
-    },10)
-    setTimeout(() => {
-        getRandomInt()
-        createSmallBlock2()
-    }, timeOut);
-    setTimeout(() => {
-        clearInterval(timerId)  
-
-    }, 4500);
 }
 
-function createSmallBlock2 () {
-    line.append(block2)
-    let f = 50
-    block2.style.left = '800px'
-    let leftNumber = Number(block2.style.left.split('px').join(''))
-    
-    let timerId = setInterval(() => {
-        f = f + 2
-        leftNumber -= 2
+class SmallBlock {
+    static createSmallBlock () {
+        let block = document.createElement('div')
+        block.classList.add('small-block')
+        line.append(block)
+        let i
+        block.style.left = '800px'
+        let leftNumber = Number(block.style.left.split('px').join(''))
+        let timerId = setInterval(() => {
+            i = i + 2
+            leftNumber -= 2
+            block.style.left = leftNumber + 'px'
+            if (bottom === 'bottom: 0' && leftNumber == 332  )  {
 
-        block2.style.left = leftNumber + 'px'
-    },10)
-    setTimeout(() => {
-        getRandomInt()
-        createSmallBlock3()
-    }, timeOut);
-    setTimeout(() => {
-        clearInterval(timerId)
-
-    }, 4500);
+                document.querySelector('.game-over-alert').setAttribute('style', 'display: block')
+                clearInterval(timerId)
+            }
+            
+            },10)
+        setTimeout(() => {
+            getRandomInt()
+            SmallBlock.createSmallBlock()
+        }, timeOut);
+        setTimeout(() => {
+            clearInterval(timerId)  
+        }, 4500);
+    }
 }
 
-function createSmallBlock3 () {
-    line.append(block3)
-    let f = 50
-    block3.style.left = '800px'
-    let leftNumber = Number(block3.style.left.split('px').join(''))
-    
-    let timerId = setInterval(() => {
-        f = f + 2
-        leftNumber -= 2
-
-        block3.style.left = leftNumber + 'px'
-    },10)
-    setTimeout(() => {
-        getRandomInt()
-        createSmallBlock4()
-    }, timeOut);
-    setTimeout(() => {
-        clearInterval(timerId)
-
-    }, 4500);
-}
-
-function createSmallBlock4 () {
-    line.append(block4)
-    let f = 50
-    block4.style.left = '800px'
-    let leftNumber = Number(block4.style.left.split('px').join(''))
-    
-    let timerId = setInterval(() => {
-        f = f + 2
-        leftNumber -= 2
-
-        block4.style.left = leftNumber + 'px'
-    },10)
-    setTimeout(() => {
-        getRandomInt()
-        createSmallBlock5()
-    }, timeOut);
-    setTimeout(() => {
-        clearInterval(timerId)
-    }, 4500);
-}
-
-function createSmallBlock5 () {
-    line.append(block5)
-    let f = 50
-    block5.style.left = '800px'
-    let leftNumber = Number(block5.style.left.split('px').join(''))
-    
-    let timerId = setInterval(() => {
-        f = f + 2
-        leftNumber -= 2
-
-        block5.style.left = leftNumber + 'px'
-    },10)
-    setTimeout(() => {
-        getRandomInt()
-        createSmallBlock()
-    }, timeOut);
-    setTimeout(() => {
-        clearInterval(timerId)
-
-    }, 4500);
-}
 
 function startTimer () {
     k--
@@ -162,9 +75,8 @@ function startTimer () {
         startAlert.textContent = 'START'
         setTimeout(() => {
             startAlert.setAttribute('style', 'display: none')
-            createSmallBlock()
+            SmallBlock.createSmallBlock()
         }, 1000);
-        
     }
 }
 
@@ -175,4 +87,5 @@ document.addEventListener('keydown', (event) => {
         jump()
     }
 })
+
 
